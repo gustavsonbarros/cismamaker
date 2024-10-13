@@ -5,3 +5,10 @@
 {% if session.profile == 'admin' %}
     <p>Você tem acesso a todas as funcionalidades de administrador.</p>
 {% elif session.profile == 'teacher' %}
+    <p>Você tem acesso às funcionalidades de professor.</p>
+{% elif session.profile == 'student' %}
+    <p>Você tem acesso às funcionalidades de aluno.</p>
+{% else %}
+    <p>Perfil desconhecido.</p>
+{% endif %}
+{% endblock %}
