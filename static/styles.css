@@ -1,0 +1,62 @@
+/* Estilos customizados para a aplicação */
+
+/* Centralizar o conteúdo da página inicial */
+.jumbotron {
+    margin-top: 50px;
+    padding: 50px 25px;
+    background-color: #f8f9fa; /* Cor de fundo clara */
+    border-radius: 10px;
+}
+
+/* Botões personalizados */
+.btn-primary {
+    background-color: #007bff; /* Azul Bootstrap */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Tom de azul mais escuro ao passar o mouse */
+}
+
+/* Estilização do formulário */
+.form-label {
+    font-weight: bold;
+}
+
+.form-control {
+    border-radius: 5px;
+}
+
+/* Ajustes de espaçamento */
+.container {
+    margin-top: 30px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Estilização de alertas */
+.alert {
+    margin-top: 20px;
+}
+
+/* Estilo para o dashboard */
+.dashboard {
+    padding: 20px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+}
+
+/* Footer fixo no final da página */
+footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid #e9ecef;
+}

@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Dashboard</h2>
+<p>Bem-vindo, {{ session.profile }}!</p>
+{% if session.profile == 'admin' %}
+    <p>Você tem acesso a todas as funcionalidades de administrador.</p>
+{% elif session.profile == 'teacher' %}

@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mt-4">Upload de Arquivo</h2>
+    <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="file" class="form-label">Escolha o arquivo</label>
+            <input type="file" class="form-control" id="file" name="file" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Descrição do arquivo</label>
+            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Digite uma descrição..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+{% endblock %}
