@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Funcionalidades do Aluno</h2>
+<div class="alert alert-info" role="alert">
+    Aqui você pode visualizar materiais e fazer upload de seus projetos.
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Visualizar Materiais</h4>
+        <p>Acesse os materiais disponíveis para suas aulas.</p>
+        <a href="{{ url_for('view_materials') }}" class="btn btn-primary">Ver Materiais</a>
+    </div>
+    <div class="col-md-6">
+        <h4>Fazer Upload de Projetos</h4>
+        <p>Envie seus projetos e compartilhe com seus professores.</p>
+        <a href="{{ url_for('upload') }}" class="btn btn-primary">Fazer Upload</a>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h4>Notificações</h4>
+    <div class="alert alert-warning" role="alert">
+        Aqui você pode adicionar mensagens importantes ou atualizações dos seus professores.
+    </div>
+</div>
+{% endblock %}

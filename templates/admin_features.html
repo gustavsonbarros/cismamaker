@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Admin Features</h2>
+<div class="alert alert-info" role="alert">
+    Aqui você pode gerenciar usuários e visualizar os uploads.
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Gerenciar Usuários</h4>
+        <p>Aqui você pode ver e gerenciar todos os usuários cadastrados.</p>
+        <a href="{{ url_for('manage_users') }}" class="btn btn-primary">Ver Usuários</a>
+    </div>
+    <div class="col-md-6">
+        <h4>Visualizar Uploads</h4>
+        <p>Veja todos os arquivos que foram enviados pelos usuários.</p>
+        <a href="{{ url_for('view_uploads') }}" class="btn btn-primary">Ver Uploads</a>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h4>Notificações</h4>
+    <div class="alert alert-warning" role="alert">
+        Aqui você pode adicionar mensagens importantes ou atualizações para os usuários.
+    </div>
+</div>
+{% endblock %}

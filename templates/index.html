@@ -1,7 +1,11 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="jumbotron text-center">
-    <h1>Bem-vindo ao CIMAS Maker!</h1>
-    <p>Compartilhe seus projetos da cultura maker e inove com a comunidade.</p>
+<div class="jumbotron text-center bg-light py-5">
+    <h1 class="display-4" aria-label="Bem-vindo ao CIMAS Maker!">Bem-vindo ao CIMAS Maker!</h1>
+    <p class="lead">Compartilhe seus projetos da cultura maker e inove com a comunidade.</p>
+    <hr class="my-4">
+    <p>Participe agora mesmo!</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('register') }}" role="button">Cadastre-se</a>
+    <a class="btn btn-secondary btn-lg" href="{{ url_for('login') }}" role="button">Login</a>
 </div>
 {% endblock %}

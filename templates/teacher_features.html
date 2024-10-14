@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Funcionalidades do Professor</h2>
+<div class="alert alert-info" role="alert">
+    Aqui você pode gerenciar suas turmas e acessar materiais.
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Gerenciar Turmas</h4>
+        <p>Aqui você pode criar, editar e excluir turmas.</p>
+        <a href="{{ url_for('manage_classes') }}" class="btn btn-primary">Ver Turmas</a>
+    </div>
+    <div class="col-md-6">
+        <h4>Visualizar Materiais</h4>
+        <p>Acesse os materiais que você pode usar em suas aulas.</p>
+        <a href="{{ url_for('view_materials') }}" class="btn btn-primary">Ver Materiais</a>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h4>Notificações</h4>
+    <div class="alert alert-warning" role="alert">
+        Aqui você pode adicionar mensagens importantes ou atualizações para seus alunos.
+    </div>
+</div>
+{% endblock %}

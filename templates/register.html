@@ -1,27 +1,54 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h2>Registrar</h2>
-<form method="POST">
+<form method="POST" novalidate> 
     <div class="mb-3">
         <label for="name" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="name" name="name" required>
+        <input type="text" class="form-control" id="name" name="name" required aria-describedby="nameHelp">
+        <div id="nameHelp" class="form-text">Por favor, insira seu nome completo.</div>
+        <div class="invalid-feedback">
+            O nome é obrigatório.
+        </div>
     </div>
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" required>
+        <input type="email" class="form-control" id="email" name="email" required aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">Seu email deve estar no formato: nome@dominio.com</div>
+        <div class="invalid-feedback">
+            Por favor, insira um endereço de email válido.
+        </div>
     </div>
     <div class="mb-3">
         <label for="password" class="form-label">Senha</label>
-        <input type="password" class="form-control" id="password" name="password" required>
+        <input type="password" class="form-control" id="password" name="password" required aria-describedby="passwordHelp">
+        <div id="passwordHelp" class="form-text">Sua senha deve ter pelo menos 8 caracteres.</div>
+        <div class="invalid-feedback">
+            Por favor, insira uma senha válida.
+        </div>
     </div>
     <div class="mb-3">
         <label for="profile" class="form-label">Perfil</label>
-        <select class="form-select" id="profile" name="profile">
+        <select class="form-select" id="profile" name="profile" required aria-describedby="profileHelp">
             <option value="admin">Administrador</option>
             <option value="teacher">Professor</option>
             <option value="student">Aluno</option>
         </select>
+        <div id="profileHelp" class="form-text">Selecione o perfil de usuário adequado.</div>
+        <div class="invalid-feedback">
+            Por favor, selecione um perfil.
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Registrar</button>
+    <button type="submit" class="btn btn-primary" id="submit-btn">Registrar</button>
 </form>
+
+<script>
+    // Desabilitar o botão de envio enquanto o formulário está sendo enviado
+    const form = document.querySelector('form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', function() {
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Enviando...'; // Feedback para o usuário
+    });
+</script>
 {% endblock %}

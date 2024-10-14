@@ -4,20 +4,27 @@
 .jumbotron {
     margin-top: 50px;
     padding: 50px 25px;
-    background-color: #f8f9fa; /* Cor de fundo clara */
+    background-color: #f8f9fa;
     border-radius: 10px;
+    text-align: center;
 }
 
 /* Botões personalizados */
 .btn-primary {
-    background-color: #007bff; /* Azul Bootstrap */
+    background-color: #007bff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .btn-primary:hover {
     background-color: #0056b3; /* Tom de azul mais escuro ao passar o mouse */
+}
+
+.btn-primary:disabled {
+    background-color: #6c757d; /* Cor de botão desativado */
+    cursor: not-allowed; /* Indicador visual de que o botão está desativado */
 }
 
 /* Estilização do formulário */
@@ -27,6 +34,26 @@
 
 .form-control {
     border-radius: 5px;
+    box-shadow: none;
+    transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color: #007bff;
+}
+
+/* Mensagens de ajuda no formulário */
+.form-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Feedback de erro */
+.invalid-feedback {
+    color: #dc3545; /* Vermelho para mensagens de erro */
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
 }
 
 /* Ajustes de espaçamento */
@@ -36,11 +63,13 @@
 
 h2 {
     margin-bottom: 20px;
+    font-weight: bold;
 }
 
 /* Estilização de alertas */
 .alert {
-    margin-top: 20px;
+    margin-top: 20px; /* Espaçamento superior */
+    border-radius: 5px;
 }
 
 /* Estilo para o dashboard */
@@ -48,6 +77,14 @@ h2 {
     padding: 20px;
     background-color: #e9ecef;
     border-radius: 8px;
+}
+
+/* Estilo para funcionalidades de administrador e professor */
+.card {
+    border: 1px solid #dee2e6; /* Borda padrão */
+    border-radius: 0.375rem; /* Bordas arredondadas */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Sombra suave */
+    margin-bottom: 1.5rem; /* Espaçamento inferior */
 }
 
 /* Footer fixo no final da página */
@@ -59,4 +96,56 @@ footer {
     width: 100%;
     text-align: center;
     border-top: 1px solid #e9ecef;
+}
+
+/* Estilo para Notificações */
+.alert-info {
+    background-color: #e3f2fd; /* Fundo claro para alertas informativos */
+    color: #0d6efd; /* Texto azul */
+}
+
+.alert-warning {
+    background-color: #fff3cd; /* Fundo claro para alertas de aviso */
+    color: #856404; /* Texto amarelo */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .jumbotron {
+        padding: 30px 15px;
+    }
+    
+    .btn-primary {
+        padding: 8px 15px;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da; /* Fundo leve para erros */
+        color: #721c24; /* Cor do texto */
+        border: 1px solid #f5c6cb; /* Borda vermelha */
+    }
+    
+    /* Melhorar a apresentação das mensagens flash */
+    .alert {
+        margin-top: 20px; /* Espaçamento superior */
+        border-radius: 5px; /* Bordas arredondadas */
+    }
+    
+    /* Adicionando um estilo para quando a mensagem de erro é exibida */
+    .invalid-feedback {
+        display: none; /* Oculta por padrão */
+    }
+    
+    /* Mostrar feedback de erro quando há uma classe de erro */
+    input:invalid ~ .invalid-feedback {
+        display: block; /* Exibir mensagem de erro quando o input é inválido */
+    }
 }

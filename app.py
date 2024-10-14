@@ -61,7 +61,7 @@ def register():
             db.execute('INSERT INTO users (name, email, password, profile) VALUES (?, ?, ?, ?)',
                        (name, email, password, profile))
             db.commit()
-            flash('Usuário cadastrado com sucesso!')
+            flash('Usuário Cadastrado com sucesso!')
             return redirect(url_for('login'))
         except sqlite3.IntegrityError:
             flash('E-mail já cadastrado.')
@@ -88,7 +88,7 @@ def login():
             session['profile'] = user['profile']
             return redirect(url_for('dashboard'))
         else:
-            flash('Login inválido. Verifique suas credenciais.')
+            flash('Login inválido, verifique sua credenciais.')
 
     return render_template('login.html')
 
@@ -121,17 +121,45 @@ def upload():
                        (session['user_id'], file.filename, file_path, description))
             db.commit()
             db.close()
-            flash('Arquivo enviado com sucesso!')
+            flash('File uploaded successfully!')
             return redirect(url_for('dashboard'))
 
     return render_template('upload.html')
 
 # Rota para logout
 
+
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('login'))
+
+# Rota para funcionalidades do administrador
+
+
+@app.route('/admin_features')
+def admin_features():
+    if 'user_id' not in session or session['profile'] != 'admin':
+        return redirect(url_for('login'))
+    return render_template('admin_features.html')
+
+# Rota para funcionalidades do professor
+
+
+@app.route('/teacher_features')
+def teacher_features():
+    if 'user_id' not in session or session['profile'] != 'teacher':
+        return redirect(url_for('login'))
+    return render_template('teacher_features.html')
+
+# Rota para funcionalidades do aluno
+
+
+@app.route('/student_features')
+def student_features():
+    if 'user_id' not in session or session['profile'] != 'student':
+        return redirect(url_for('login'))
+    return render_template('student_features.html')
 
 
 if __name__ == '__main__':

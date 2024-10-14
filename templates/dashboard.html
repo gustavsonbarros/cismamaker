@@ -1,14 +1,69 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h2>Dashboard</h2>
-<p>Bem-vindo, {{ session.profile }}!</p>
-{% if session.profile == 'admin' %}
-    <p>Você tem acesso a todas as funcionalidades de administrador.</p>
-{% elif session.profile == 'teacher' %}
-    <p>Você tem acesso às funcionalidades de professor.</p>
-{% elif session.profile == 'student' %}
-    <p>Você tem acesso às funcionalidades de aluno.</p>
-{% else %}
-    <p>Perfil desconhecido.</p>
-{% endif %}
+<h2 class="mb-4">Dashboard</h2>
+<p class="lead">Bem-vindo, {{ session.profile }}!</p>
+
+<div class="alert alert-info" role="alert">
+    Aqui estão algumas das funcionalidades disponíveis para você:
+</div>
+
+<div class="row">
+    {% if session.profile == 'admin' %}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Administração
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Você tem acesso a todas as funcionalidades de administrador.</p>
+                    <a href="{{ url_for('admin_features') }}" class="btn btn-primary">Ver Funcionalidades</a>
+                </div>
+            </div>
+        </div>
+    {% elif session.profile == 'teacher' %}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Funcionalidades do Professor
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Você pode gerenciar suas turmas e materiais.</p>
+                    <a href="{{ url_for('teacher_features') }}" class="btn btn-primary">Gerenciar Turmas</a>
+                </div>
+            </div>
+        </div>
+    {% elif session.profile == 'student' %}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Funcionalidades do Aluno
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Acesse seus materiais e faça upload de projetos.</p>
+                    <a href="{{ url_for('student_features') }}" class="btn btn-primary">Ver Materiais</a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Perfil Desconhecido
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Você não tem acesso a funcionalidades específicas.</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Seção de mensagens/notificações -->
+<div class="mt-4">
+    <h4>Notificações</h4>
+    <div class="alert alert-warning" role="alert">
+        Aqui você pode adicionar mensagens importantes ou atualizações para os usuários.
+    </div>
+</div>
+
 {% endblock %}
