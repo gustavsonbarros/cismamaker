@@ -1,11 +1,142 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="jumbotron text-center bg-light py-5">
-    <h1 class="display-4" aria-label="Bem-vindo ao CIMAS Maker!">Bem-vindo ao CIMAS Maker!</h1>
-    <p class="lead">Compartilhe seus projetos da cultura maker e inove com a comunidade.</p>
-    <hr class="my-4">
-    <p>Participe agora mesmo!</p>
-    <a class="btn btn-primary btn-lg" href="{{ url_for('register') }}" role="button">Cadastre-se</a>
-    <a class="btn btn-secondary btn-lg" href="{{ url_for('login') }}" role="button">Login</a>
+<!-- Barra de navegação fixa -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('index') }}">
+      <img src="path/to/logo.png" alt="CIMAS Maker" class="logo-nav">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('register') }}">Cadastre-se</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Seção principal -->
+<div class="jumbotron text-center bg-light py-5 mt-5">
+  <h1 class="display-4">Bem-vindo ao CIMAS Maker!</h1>
+  <p class="lead">Conecte-se com a comunidade maker, compartilhe seus projetos e inove juntos.</p>
+  <hr class="my-4">
+  <p>Participe agora e comece a criar!</p>
+  <a class="btn btn-primary btn-lg" href="{{ url_for('register') }}" role="button">Cadastre-se</a>
+  <a class="btn btn-outline-primary btn-lg" href="{{ url_for('login') }}" role="button">Login</a>
 </div>
+
+<!-- Seção de informações adicionais -->
+<!-- Cards de Destaques de Funcionalidades -->
+<div class="row mt-5">
+  <div class="col-md-4">
+    <div class="card border-0 rounded-3 shadow">
+      <img src="path/to/project-sharing.jpg" class="card-img-top" alt="Compartilhe seus projetos">
+      <div class="card-body text-center">
+        <i class="fas fa-share-alt fa-3x text-primary"></i>
+        <h5 class="card-title mt-3">Compartilhe seus projetos</h5>
+        <p class="card-text">Publique seus projetos e colabore com outros makers.</p>
+        <!-- Botão de like com contagem -->
+        <button class="btn btn-outline-primary like-button" data-likes="0">
+          <i class="fas fa-thumbs-up"></i> Curtir <span class="like-count">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card border-0 rounded-3 shadow">
+      <img src="path/to/community-learning.jpg" class="card-img-top" alt="Aprenda com a comunidade">
+      <div class="card-body text-center">
+        <i class="fas fa-graduation-cap fa-3x text-primary"></i>
+        <h5 class="card-title mt-3">Aprenda com a comunidade</h5>
+        <p class="card-text">Explore recursos criados por outros membros e evolua suas habilidades.</p>
+        <!-- Botão de like com contagem -->
+        <button class="btn btn-outline-primary like-button" data-likes="0">
+          <i class="fas fa-thumbs-up"></i> Curtir <span class="like-count">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card border-0 rounded-3 shadow">
+      <img src="path/to/innovation-ideas.jpg" class="card-img-top" alt="Inove com novas ideias">
+      <div class="card-body text-center">
+        <i class="fas fa-lightbulb fa-3x text-primary"></i>
+        <h5 class="card-title mt-3">Inove com novas ideias</h5>
+        <p class="card-text">Participe de eventos, hackathons e desafios para transformar suas ideias em projetos.</p>
+        <!-- Botão de like com contagem -->
+        <button class="btn btn-outline-primary like-button" data-likes="0">
+          <i class="fas fa-thumbs-up"></i> Curtir <span class="like-count">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script JavaScript para incrementar os likes -->
+<script>
+  document.querySelectorAll('.like-button').forEach(button => {
+    button.addEventListener('click', () => {
+      let currentLikes = parseInt(button.getAttribute('data-likes'));
+      currentLikes += 1;
+      button.setAttribute('data-likes', currentLikes);
+      button.querySelector('.like-count').textContent = currentLikes;
+    });
+  });
+</script>
+
+  <!-- Seção de vídeo -->
+  <div class="container py-5">
+    <h2 class="text-center mb-4">Assista ao vídeo</h2>
+    <div class="text-center">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/MnOf3fRl-qI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Seção de Depoimentos -->
+  <div class="mt-5">
+    <h3 class="text-center">O que estão dizendo:</h3>
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0 rounded-3">
+          <div class="card-body">
+            <p class="card-text">"O CIMAS Maker me conectou com uma comunidade incrível. Aprendi muito!"</p>
+            <footer class="blockquote-footer">João Silva, Criador de Projetos</footer>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0 rounded-3">
+          <div class="card-body">
+            <p class="card-text">"Aqui encontrei colaboração, aprendizado e inspiração para os meus projetos."</p>
+            <footer class="blockquote-footer">Maria Oliveira, Estudante</footer>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0 rounded-3">
+          <div class="card-body">
+            <p class="card-text">"Uma plataforma intuitiva que facilita a troca de ideias e conhecimento."</p>
+            <footer class="blockquote-footer">Carlos Lima, Professor</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Rodapé -->
+<footer class="footer bg-primary text-white py-4 mt-5">
+  <div class="container text-center">
+      <p>&copy; 2024 CIMAS Maker | Todos os direitos reservados</p>
+      <p>Desenvolvido por <strong>Gustavson Barros</strong></p>
+  </div>
+</footer>
+
 {% endblock %}

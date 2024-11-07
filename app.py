@@ -1,9 +1,35 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_mail import Mail, Message
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
+import os
 
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'
+
+# Configurações do Flask-Mail para Hotmail
+app.config['MAIL_SERVER'] = 'smtp.office365.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+# Seu email do Hotmail
+app.config['MAIL_USERNAME'] = 'adrilysilva8@gmail.com'
+app.config['MAIL_PASSWORD'] = 'escola2015@'  # Sua senha do email
+# Seu email do Hotmail
+app.config['MAIL_DEFAULT_SENDER'] = 'adrilysilva8@gmail.com'
+mail = Mail(app)
+
+# Gerador de tokens seguros
+s = URLSafeTimedSerializer(app.secret_key)
+
+# Extensões de arquivo permitidas para upload
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf', 'docx'}
+
+# Função para verificar extensões permitidas
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Conectar ao banco de dados SQLite
 
@@ -53,15 +79,22 @@ def register():
     if request.method == 'POST':
         name = request.form['name']
         email = request.form['email']
-        password = generate_password_hash(request.form['password'])
+        password = request.form['password']
         profile = request.form['profile']
+
+        # Verifica se a senha tem pelo menos 8 caracteres
+        if len(password) < 8:
+            flash('A senha deve ter pelo menos 8 caracteres.')
+            return redirect(url_for('register'))
+
+        hashed_password = generate_password_hash(password)
 
         db = get_db_connection()
         try:
             db.execute('INSERT INTO users (name, email, password, profile) VALUES (?, ?, ?, ?)',
-                       (name, email, password, profile))
+                       (name, email, hashed_password, profile))
             db.commit()
-            flash('Usuário Cadastrado com sucesso!')
+            flash('Usuário cadastrado com sucesso!')
             return redirect(url_for('login'))
         except sqlite3.IntegrityError:
             flash('E-mail já cadastrado.')
@@ -79,8 +112,7 @@ def login():
         password = request.form['password']
 
         db = get_db_connection()
-        user = db.execute(
-            'SELECT * FROM users WHERE email = ?', (email,)).fetchone()
+        user = db.execute('SELECT * FROM users WHERE email = ?', (email,)).fetchone()
         db.close()
 
         if user and check_password_hash(user['password'], password):
@@ -88,9 +120,72 @@ def login():
             session['profile'] = user['profile']
             return redirect(url_for('dashboard'))
         else:
-            flash('Login inválido, verifique sua credenciais.')
+            flash('Login inválido, verifique suas credenciais.')
 
     return render_template('login.html')
+
+# Rota de solicitação de redefinição de senha
+
+
+@app.route('/reset_password_request', methods=['GET', 'POST'])
+def reset_password_request():
+    if request.method == 'POST':
+        email = request.form['email']
+
+        db = get_db_connection()
+        user = db.execute(
+            'SELECT * FROM users WHERE email = ?', (email,)).fetchone()
+        db.close()
+
+        if user:
+            token = s.dumps(email, salt='password-reset-salt')
+            link = url_for('reset_password', token=token, _external=True)
+
+            # Enviar o email com o link de redefinição
+            msg = Message('Redefinir Senha', recipients=[email])
+            msg.body = f'Clique no link para redefinir sua senha: {link}'
+            mail.send(msg)
+
+            flash('Instruções para redefinir a senha foram enviadas para o seu email.')
+            return redirect(url_for('login'))
+        else:
+            flash('Email não encontrado.')
+            return redirect(url_for('reset_password_request'))
+
+    return render_template('reset_password_request.html')
+
+# Rota para redefinir senha
+
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    try:
+        email = s.loads(token, salt='password-reset-salt',
+                        max_age=3600)  # 1 hora de validade
+    except SignatureExpired:
+        flash('O link de redefinição de senha expirou.')
+        return redirect(url_for('reset_password_request'))
+
+    if request.method == 'POST':
+        new_password = request.form['password']
+
+        # Verifica se a nova senha tem pelo menos 8 caracteres
+        if len(new_password) < 8:
+            flash('A nova senha deve ter pelo menos 8 caracteres.')
+            return redirect(url_for('reset_password', token=token))
+
+        hashed_password = generate_password_hash(new_password)
+
+        db = get_db_connection()
+        db.execute('UPDATE users SET password = ? WHERE email = ?',
+                   (hashed_password, email))
+        db.commit()
+        db.close()
+
+        flash('Sua senha foi redefinida com sucesso!')
+        return redirect(url_for('login'))
+
+    return render_template('reset_password.html')
 
 # Rota de dashboard
 
@@ -112,7 +207,7 @@ def upload():
     if request.method == 'POST':
         file = request.files['file']
         description = request.form['description']
-        if file:
+        if file and allowed_file(file.filename):
             file_path = f'uploads/{file.filename}'
             file.save(file_path)
 
@@ -121,8 +216,11 @@ def upload():
                        (session['user_id'], file.filename, file_path, description))
             db.commit()
             db.close()
-            flash('File uploaded successfully!')
+            flash('Arquivo enviado com sucesso!')
             return redirect(url_for('dashboard'))
+        else:
+            flash('Tipo de arquivo não permitido ou nenhum arquivo selecionado.')
+            return redirect(url_for('upload'))
 
     return render_template('upload.html')
 

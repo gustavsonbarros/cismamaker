@@ -1,151 +1,159 @@
 /* Estilos customizados para a aplicação */
 
-/* Centralizar o conteúdo da página inicial */
+/* Cor de fundo da página */
+body {
+    background-color: #f1f1f1; /* Cor suave e mais clara, estilo Tinkercad */
+    font-family: 'Roboto', sans-serif; /* Fonte limpa e moderna */
+    margin-top: 80px; /* Para ajustar a barra de navegação fixa */
+}
+
+/* Cabeçalho com fundo mais claro */
+.navbar {
+    background-color: #ffffff; /* Branco para o cabeçalho */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 10px 0; /* Ajusta o tamanho do cabeçalho */
+}
+
+/* Navbar item hover */
+.navbar-nav .nav-link:hover {
+    color: #007bff; /* Cor de destaque ao passar o mouse */
+    background-color: #e9ecef; /* Cor de fundo suave ao passar o mouse */
+}
+
+/* Navbar item ativo */
+.navbar-nav .nav-link.active {
+    color: #007bff;
+}
+
+/* Seção Jumbotron */
 .jumbotron {
-    margin-top: 50px;
-    padding: 50px 25px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
+    background-color: #ffffff; /* Fundo branco */
+    color: #333333; /* Texto escuro */
+    padding: 60px 40px; /* Aumentar o padding para mais destaque */
+    border-radius: 20px; /* Bordas mais arredondadas */
     text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); /* Sombra suave */
+    margin-top: 120px; /* Ajuste para o espaço após a navbar */
+    animation: fadeIn 1s ease-out; /* Animação suave */
 }
 
-/* Botões personalizados */
-.btn-primary {
+/* Ajustar título e texto da jumbotron */
+.jumbotron h1 {
+    font-size: 3.5rem; /* Tamanho maior */
+    font-weight: 700; /* Título mais forte */
+    color: #333; /* Cor mais escura para melhor contraste */
+}
+
+.jumbotron p {
+    font-size: 1.2rem;
+    color: #555; /* Cor de texto mais suave */
+}
+
+/* Botões */
+.btn {
+    border-radius: 50px; /* Bordas arredondadas */
+    padding: 12px 30px;
+    font-size: 1.2rem;
     background-color: #007bff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease-in-out;
+    color: #ffffff;
+    transition: all 0.3s ease;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3; /* Tom de azul mais escuro ao passar o mouse */
+.btn:hover {
+    background-color: #0056b3; /* Cor ao passar o mouse */
+    transform: scale(1.05); /* Aumentar levemente o tamanho */
 }
 
-.btn-primary:disabled {
-    background-color: #6c757d; /* Cor de botão desativado */
-    cursor: not-allowed; /* Indicador visual de que o botão está desativado */
-}
-
-/* Estilização do formulário */
-.form-label {
-    font-weight: bold;
-}
-
-.form-control {
-    border-radius: 5px;
-    box-shadow: none;
-    transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-}
-
-.form-control:focus {
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    border-color: #007bff;
-}
-
-/* Mensagens de ajuda no formulário */
-.form-text {
-    font-size: 0.9rem;
-    color: #6c757d;
-}
-
-/* Feedback de erro */
-.invalid-feedback {
-    color: #dc3545; /* Vermelho para mensagens de erro */
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-}
-
-/* Ajustes de espaçamento */
-.container {
-    margin-top: 30px;
-}
-
-h2 {
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-/* Estilização de alertas */
-.alert {
-    margin-top: 20px; /* Espaçamento superior */
-    border-radius: 5px;
-}
-
-/* Estilo para o dashboard */
-.dashboard {
-    padding: 20px;
-    background-color: #e9ecef;
-    border-radius: 8px;
-}
-
-/* Estilo para funcionalidades de administrador e professor */
+/* Cards */
 .card {
-    border: 1px solid #dee2e6; /* Borda padrão */
-    border-radius: 0.375rem; /* Bordas arredondadas */
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Sombra suave */
-    margin-bottom: 1.5rem; /* Espaçamento inferior */
+    border-radius: 15px; /* Bordas mais arredondadas */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
-/* Footer fixo no final da página */
-footer {
-    background-color: #f8f9fa;
+.card:hover {
+    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.card-body {
     padding: 20px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+}
+
+/* Cards de imagens */
+.card-img-top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+/* Seção de depoimentos */
+blockquote-footer {
+    font-style: italic;
+    color: #777;
+}
+
+/* Animação para entradas suaves dos elementos */
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+
+/* Aplica animação de fadeIn nas seções */
+.jumbotron, .card, .navbar {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Transição suave para links e botões */
+.nav-link, .btn {
+    transition: all 0.3s ease;
+}
+
+/* Espaçamento entre cards */
+.row.mt-5 {
+    margin-top: 40px;
+}
+
+/* Adicionando espaçamento nas colunas de cards */
+.card-body {
+    padding: 20px;
+}
+
+/* Formatação de texto nos depoimentos */
+.card-text {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Seção de informações adicionais */
+.container.py-5 {
+    padding-top: 80px; /* Ajuste o espaço entre a navbar e a seção */
+    padding-bottom: 80px;
+}
+
+/* Cards de funcionalidades */
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 25px;
+    color: #444; /* Cor de texto suave para melhor legibilidade */
+}
+
+/* Alinhamento de texto em seções */
+h2, h3 {
     text-align: center;
-    border-top: 1px solid #e9ecef;
-}
-
-/* Estilo para Notificações */
-.alert-info {
-    background-color: #e3f2fd; /* Fundo claro para alertas informativos */
-    color: #0d6efd; /* Texto azul */
-}
-
-.alert-warning {
-    background-color: #fff3cd; /* Fundo claro para alertas de aviso */
-    color: #856404; /* Texto amarelo */
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .jumbotron {
-        padding: 30px 15px;
-    }
-    
-    .btn-primary {
-        padding: 8px 15px;
-    }
-
-    .container {
-        margin-top: 20px;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    .alert-danger {
-        background-color: #f8d7da; /* Fundo leve para erros */
-        color: #721c24; /* Cor do texto */
-        border: 1px solid #f5c6cb; /* Borda vermelha */
-    }
-    
-    /* Melhorar a apresentação das mensagens flash */
-    .alert {
-        margin-top: 20px; /* Espaçamento superior */
-        border-radius: 5px; /* Bordas arredondadas */
-    }
-    
-    /* Adicionando um estilo para quando a mensagem de erro é exibida */
-    .invalid-feedback {
-        display: none; /* Oculta por padrão */
-    }
-    
-    /* Mostrar feedback de erro quando há uma classe de erro */
-    input:invalid ~ .invalid-feedback {
-        display: block; /* Exibir mensagem de erro quando o input é inválido */
-    }
+    color: #333;
 }
