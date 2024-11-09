@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR"> <!-- Alterado para pt-BR para melhor adequação ao público -->
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +11,14 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    <!-- Animate.css para animações -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    {% block additional_head %} 
+    {% endblock %}
 </head>
 <body>
     <!-- Navbar com acessibilidade -->
@@ -36,7 +42,7 @@
                             <a class="nav-link" href="{{ url_for('login') }}" aria-label="Ir para a página de login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('register') }}" aria-label="Ir para a página de cadastro">Register</a>
+                            <a class="nav-link" href="{{ url_for('register') }}" aria-label="Ir para a página de cadastro">Cadastrar-se</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -60,5 +66,8 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    {% block scripts %}
+    {% endblock %}
 </body>
 </html>

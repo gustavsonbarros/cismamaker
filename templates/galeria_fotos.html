@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria de Fotos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Galeria de Fotos</h1>
+    </header>
+    <main>
+        <div class="gallery">
+            {% for foto in fotos %}
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='uploads/' + foto) }}" alt="Foto">
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Sua Aplicação</p>
+    </footer>
+</body>
+</html>

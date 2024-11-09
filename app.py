@@ -5,6 +5,8 @@ from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 import os
 
+
+
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'
 
@@ -12,10 +14,8 @@ app.secret_key = 'sua_chave_secreta'
 app.config['MAIL_SERVER'] = 'smtp.office365.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-# Seu email do Hotmail
 app.config['MAIL_USERNAME'] = 'adrilysilva8@gmail.com'
 app.config['MAIL_PASSWORD'] = 'escola2015@'  # Sua senha do email
-# Seu email do Hotmail
 app.config['MAIL_DEFAULT_SENDER'] = 'adrilysilva8@gmail.com'
 mail = Mail(app)
 
@@ -26,22 +26,16 @@ s = URLSafeTimedSerializer(app.secret_key)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf', 'docx'}
 
 # Função para verificar extensões permitidas
-
-
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Conectar ao banco de dados SQLite
-
-
 def get_db_connection():
     conn = sqlite3.connect('cimas_maker.db')
     conn.row_factory = sqlite3.Row
     return conn
 
 # Inicializar o banco de dados
-
-
 def init_db():
     with app.app_context():
         db = get_db_connection()
@@ -61,19 +55,19 @@ def init_db():
                 description TEXT,
                 FOREIGN KEY (user_id) REFERENCES users (id)
             );
+            CREATE TABLE IF NOT EXISTS feedback (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                content TEXT NOT NULL
+            );
         ''')
         db.commit()
 
 # Rota inicial
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
 
 # Rota de registro de usuários
-
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -103,8 +97,6 @@ def register():
     return render_template('register.html')
 
 # Rota de login
-
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -125,16 +117,13 @@ def login():
     return render_template('login.html')
 
 # Rota de solicitação de redefinição de senha
-
-
 @app.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
     if request.method == 'POST':
         email = request.form['email']
 
         db = get_db_connection()
-        user = db.execute(
-            'SELECT * FROM users WHERE email = ?', (email,)).fetchone()
+        user = db.execute('SELECT * FROM users WHERE email = ?', (email,)).fetchone()
         db.close()
 
         if user:
@@ -155,13 +144,10 @@ def reset_password_request():
     return render_template('reset_password_request.html')
 
 # Rota para redefinir senha
-
-
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     try:
-        email = s.loads(token, salt='password-reset-salt',
-                        max_age=3600)  # 1 hora de validade
+        email = s.loads(token, salt='password-reset-salt', max_age=3600)  # 1 hora de validade
     except SignatureExpired:
         flash('O link de redefinição de senha expirou.')
         return redirect(url_for('reset_password_request'))
@@ -177,8 +163,7 @@ def reset_password(token):
         hashed_password = generate_password_hash(new_password)
 
         db = get_db_connection()
-        db.execute('UPDATE users SET password = ? WHERE email = ?',
-                   (hashed_password, email))
+        db.execute('UPDATE users SET password = ? WHERE email = ?', (hashed_password, email))
         db.commit()
         db.close()
 
@@ -188,8 +173,6 @@ def reset_password(token):
     return render_template('reset_password.html')
 
 # Rota de dashboard
-
-
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' not in session:
@@ -197,8 +180,6 @@ def dashboard():
     return render_template('dashboard.html', profile=session['profile'])
 
 # Rota para upload de arquivos
-
-
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if 'user_id' not in session:
@@ -225,16 +206,12 @@ def upload():
     return render_template('upload.html')
 
 # Rota para logout
-
-
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('login'))
 
 # Rota para funcionalidades do administrador
-
-
 @app.route('/admin_features')
 def admin_features():
     if 'user_id' not in session or session['profile'] != 'admin':
@@ -242,8 +219,6 @@ def admin_features():
     return render_template('admin_features.html')
 
 # Rota para funcionalidades do professor
-
-
 @app.route('/teacher_features')
 def teacher_features():
     if 'user_id' not in session or session['profile'] != 'teacher':
@@ -251,13 +226,39 @@ def teacher_features():
     return render_template('teacher_features.html')
 
 # Rota para funcionalidades do aluno
-
-
 @app.route('/student_features')
 def student_features():
     if 'user_id' not in session or session['profile'] != 'student':
         return redirect(url_for('login'))
     return render_template('student_features.html')
+
+# Rota para feedback
+@app.route('/feedback', methods=['POST'])
+def feedback():
+    user_feedback = request.form['feedback']
+    
+    if not user_feedback:
+        flash('Por favor, forneça um feedback.')
+        return redirect(url_for('index'))
+
+    try:
+        db = get_db_connection()
+        db.execute('INSERT INTO feedback (content) VALUES (?)', (user_feedback,))
+        db.commit()
+        db.close()
+
+        flash('Obrigado pelo seu feedback!')
+    except sqlite3.Error as e:
+        flash(f'Ocorreu um erro ao salvar seu feedback: {e}')
+    
+    return redirect(url_for('index'))
+
+# Rota para o chatbot
+@app.route('/chatbot')
+def chatbot():
+    
+        
+    return render_template('chatbot.html')
 
 
 if __name__ == '__main__':

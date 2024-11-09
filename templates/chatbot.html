@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<!-- Chat Container -->
+<div class="chat-container">
+    <div class="chat-box" id="chat-box">
+        <div class="chat-message bot-message">
+            Olá! Como posso ajudar você hoje?
+        </div>
+    </div>
+    
+    <!-- Formulário para enviar mensagens -->
+    <form id="chat-form" onsubmit="sendMessage(event)">
+        <input type="text" id="user-input" placeholder="Digite sua mensagem..." autofocus required>
+        <button type="submit">Enviar</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Função para enviar a mensagem
+function sendMessage(event) {
+    event.preventDefault(); // Previne o envio do formulário (recarregar a página)
+    
+    const userInput = document.getElementById('user-input').value.trim();
+    if (!userInput) return; // Não envia mensagem se estiver vazia
+
+    // Exibir a mensagem do usuário
+    const chatBox = document.getElementById('chat-box');
+    const userMessage = document.createElement('div');
+    userMessage.className = 'chat-message user-message';
+    userMessage.textContent = userInput;
+    chatBox.appendChild(userMessage);
+    
+    // Limpar o campo de entrada
+    document.getElementById('user-input').value = '';
+    
+    // Simular resposta do bot
+    setTimeout(() => {
+        const botResponse = document.createElement('div');
+        botResponse.className = 'chat-message bot-message';
+        botResponse.textContent = 'Resposta automática: ' + userInput;
+        chatBox.appendChild(botResponse);
+        
+        // Rolar o chat para a última mensagem
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }, 1000);
+}
+</script>
+{% endblock %}

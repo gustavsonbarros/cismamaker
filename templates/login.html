@@ -1,30 +1,47 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+<!-- Centralizando o conteúdo na página -->
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="col-md-4">
+        <h2 class="text-center mb-4">Bem-vindo</h2>
+        
+        <!-- Formulário de Login -->
+        <form method="POST" novalidate>
+            <!-- Campo de Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">Por favor, insira um endereço de email válido.</div>
+                <div class="invalid-feedback">
+                    O email é obrigatório.
+                </div>
+            </div>
+            
+            <!-- Campo de Senha -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="password" name="password" required aria-describedby="passwordHelp">
+                <div id="passwordHelp" class="form-text">Sua senha deve ter pelo menos 8 caracteres.</div>
+                <div class="invalid-feedback">
+                    A senha é obrigatória.
+                </div>
+            </div>
+            
+            <!-- Botão de Envio -->
+            <button type="submit" class="btn btn-primary w-100" id="submit-btn">Entrar</button>
+        </form>
+        
+        <!-- Link para recuperação de senha -->
+        <div class="mt-3 text-center">
+            <a href="{{ url_for('reset_password_request') }}">Esqueceu sua senha?</a>
+        </div>
 
-
-<form method="POST" novalidate> <!-- 'novalidate' permite que você controle a validação -->
-    <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" required aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">Por favor, insira um endereço de email válido.</div>
-        <div class="invalid-feedback">
-            O email é obrigatório.
+        <!-- Exibindo um link de cadastro se o usuário não tiver conta -->
+        <div class="mt-3 text-center">
+            <p>Não tem uma conta? <a href="{{ url_for('register') }}">Cadastre-se</a></p>
         </div>
     </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Senha</label>
-        <input type="password" class="form-control" id="password" name="password" required aria-describedby="passwordHelp">
-        <div id="passwordHelp" class="form-text">Sua senha deve ter pelo menos 8 caracteres.</div>
-        <div class="invalid-feedback">
-            A senha é obrigatória.
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary" id="submit-btn">Entrar</button>
-</form>
-
-<div class="mt-3">
-    <a href="{{ url_for('reset_password_request') }}">Esqueceu sua senha?</a>
 </div>
 
 <script>
@@ -34,7 +51,7 @@
 
     form.addEventListener('submit', function() {
         submitBtn.disabled = true;
-        submitBtn.innerText = 'Enviando...'; // Feedback para o usuário
+        submitBtn.innerText = 'Enviando...'; // Feedback para o usuário 
     });
 </script>
 {% endblock %}

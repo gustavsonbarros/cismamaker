@@ -2,33 +2,50 @@
 {% block content %}
 <h2>Registrar</h2>
 <form method="POST" novalidate> 
-    <div class="mb-3">
+    <div class="mb-2">
         <label for="name" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="name" name="name" required aria-describedby="nameHelp">
+        <input type="text" class="form-control form-control-sm" id="name" name="name" required aria-describedby="nameHelp">
         <div id="nameHelp" class="form-text">Por favor, insira seu nome completo.</div>
         <div class="invalid-feedback">
             O nome é obrigatório.
         </div>
     </div>
-    <div class="mb-3">
+    
+    <div class="mb-2">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" required aria-describedby="emailHelp">
+        <input type="email" class="form-control form-control-sm" id="email" name="email" required aria-describedby="emailHelp">
         <div id="emailHelp" class="form-text">Seu email deve estar no formato: nome@dominio.com</div>
         <div class="invalid-feedback">
             Por favor, insira um endereço de email válido.
         </div>
     </div>
-    <div class="mb-3">
+    
+    <div class="mb-2">
         <label for="password" class="form-label">Senha</label>
-        <input type="password" class="form-control" id="password" name="password" required aria-describedby="passwordHelp">
+        <div class="input-group input-group-sm">
+            <input type="password" class="form-control" id="password" name="password" required>
+            <button type="button" class="btn btn-outline-secondary" id="toggle-password">
+                <i class="bi bi-eye-slash"></i>
+            </button>
+        </div>
         <div id="passwordHelp" class="form-text">Sua senha deve ter pelo menos 8 caracteres.</div>
         <div class="invalid-feedback">
             Por favor, insira uma senha válida.
         </div>
     </div>
-    <div class="mb-3">
+    
+    <div class="mb-2">
+        <label for="confirm-password" class="form-label">Confirmar Senha</label>
+        <input type="password" class="form-control form-control-sm" id="confirm-password" name="confirm-password" required>
+        <div id="confirmPasswordHelp" class="form-text">Digite novamente sua senha para confirmação.</div>
+        <div class="invalid-feedback">
+            As senhas não coincidem.
+        </div>
+    </div>
+    
+    <div class="mb-2">
         <label for="profile" class="form-label">Perfil</label>
-        <select class="form-select" id="profile" name="profile" required aria-describedby="profileHelp">
+        <select class="form-select form-select-sm" id="profile" name="profile" required aria-describedby="profileHelp">
             <option value="admin">Administrador</option>
             <option value="teacher">Professor</option>
             <option value="student">Aluno</option>
@@ -38,10 +55,50 @@
             Por favor, selecione um perfil.
         </div>
     </div>
-    <button type="submit" class="btn btn-primary" id="submit-btn">Registrar</button>
+    
+    <button type="submit" class="btn btn-primary btn-sm" id="submit-btn">Registrar</button>
 </form>
 
 <script>
+    // Validação em tempo real
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirm-password');
+    
+    nameInput.addEventListener('input', function() {
+        if (nameInput.value.trim().length < 3) {
+            nameInput.setCustomValidity('O nome deve ter pelo menos 3 caracteres.');
+        } else {
+            nameInput.setCustomValidity('');
+        }
+    });
+
+    emailInput.addEventListener('input', function() {
+        const regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+        if (!regex.test(emailInput.value)) {
+            emailInput.setCustomValidity('Por favor, insira um endereço de e-mail válido.');
+        } else {
+            emailInput.setCustomValidity('');
+        }
+    });
+
+    passwordInput.addEventListener('input', function() {
+        if (passwordInput.value.length < 8) {
+            passwordInput.setCustomValidity('A senha deve ter pelo menos 8 caracteres.');
+        } else {
+            passwordInput.setCustomValidity('');
+        }
+    });
+
+    confirmPasswordInput.addEventListener('input', function() {
+        if (confirmPasswordInput.value !== passwordInput.value) {
+            confirmPasswordInput.setCustomValidity('As senhas não coincidem.');
+        } else {
+            confirmPasswordInput.setCustomValidity('');
+        }
+    });
+
     // Desabilitar o botão de envio enquanto o formulário está sendo enviado
     const form = document.querySelector('form');
     const submitBtn = document.getElementById('submit-btn');
@@ -49,6 +106,15 @@
     form.addEventListener('submit', function() {
         submitBtn.disabled = true;
         submitBtn.innerText = 'Enviando...'; // Feedback para o usuário
+    });
+
+    // Mostrar/Ocultar senha
+    const togglePassword = document.getElementById('toggle-password');
+    togglePassword.addEventListener('click', function() {
+        const type = passwordInput.type === 'password' ? 'text' : 'password';
+        passwordInput.type = type;
+        confirmPasswordInput.type = type;
+        togglePassword.innerHTML = type === 'password' ? '<i class="bi bi-eye-slash"></i>' : '<i class="bi bi-eye"></i>';
     });
 </script>
 {% endblock %}

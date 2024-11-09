@@ -1,10 +1,10 @@
-/* Estilos customizados para a aplicação */
+/* Estilos gerais da aplicação */
 
 /* Cor de fundo da página */
 body {
     background-color: #f1f1f1; /* Cor suave e mais clara, estilo Tinkercad */
     font-family: 'Roboto', sans-serif; /* Fonte limpa e moderna */
-    margin-top: 80px; /* Para ajustar a barra de navegação fixa */
+    margin-top: 80px; /* Ajuste para a barra de navegação fixa */
 }
 
 /* Cabeçalho com fundo mais claro */
@@ -22,14 +22,14 @@ body {
 
 /* Navbar item ativo */
 .navbar-nav .nav-link.active {
-    color: #007bff;
+    color: #FF6F61; /* Laranja Tinkercad */
 }
 
 /* Seção Jumbotron */
 .jumbotron {
     background-color: #ffffff; /* Fundo branco */
     color: #333333; /* Texto escuro */
-    padding: 60px 40px; /* Aumentar o padding para mais destaque */
+    padding: 60px 40px; /* Aumenta o padding para mais destaque */
     border-radius: 20px; /* Bordas mais arredondadas */
     text-align: center;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); /* Sombra suave */
@@ -37,7 +37,7 @@ body {
     animation: fadeIn 1s ease-out; /* Animação suave */
 }
 
-/* Ajustar título e texto da jumbotron */
+/* Ajuste título e texto da jumbotron */
 .jumbotron h1 {
     font-size: 3.5rem; /* Tamanho maior */
     font-weight: 700; /* Título mais forte */
@@ -54,25 +54,27 @@ body {
     border-radius: 50px; /* Bordas arredondadas */
     padding: 12px 30px;
     font-size: 1.2rem;
-    background-color: #007bff;
+    background-color: #007bff; /* Azul principal */
     color: #ffffff;
     transition: all 0.3s ease;
 }
 
 .btn:hover {
     background-color: #0056b3; /* Cor ao passar o mouse */
-    transform: scale(1.05); /* Aumentar levemente o tamanho */
+    transform: scale(1.05); /* Aumenta levemente o tamanho */
 }
 
 /* Cards */
 .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 15px; /* Bordas mais arredondadas */
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    /*box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);*/
+    /*transition: transform 0.3s, box-shadow 0.3s;*/
 }
 
 .card:hover {
-    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+    transform: scale(1.05); /* Aumenta ligeiramente o tamanho do card */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra mais intensa */
 }
 
 .card-title {
@@ -97,7 +99,7 @@ blockquote-footer {
     color: #777;
 }
 
-/* Animação para entradas suaves dos elementos */
+/* Animações */
 @keyframes fadeIn {
     from {
       opacity: 0;
@@ -124,21 +126,54 @@ blockquote-footer {
     margin-top: 40px;
 }
 
-/* Adicionando espaçamento nas colunas de cards */
-.card-body {
-    padding: 20px;
+/* Alinhamento de texto em seções */
+h2, h3 {
+    text-align: center;
+    color: #333;
 }
 
-/* Formatação de texto nos depoimentos */
-.card-text {
-    font-size: 1rem;
-    color: #666;
+/* Formulário de feedback */
+.feedback-form {
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-/* Seção de informações adicionais */
-.container.py-5 {
-    padding-top: 80px; /* Ajuste o espaço entre a navbar e a seção */
-    padding-bottom: 80px;
+.feedback-form .form-control {
+    border-radius: 5px;
+    resize: none;
+}
+
+.feedback-form button {
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.feedback-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos dos botões */
+.btn-primary {
+    background-color: #FF6F61; /* Laranja Tinkercad */
+    border-color: #FF6F61;
+}
+
+.btn-outline-primary {
+    color: #00A5E3; /* Azul Tinkercad */
+    border-color: #00A5E3;
+}
+
+/* Hover para botões outline */
+.btn-outline-primary:hover {
+    background-color: #00A5E3;
+    color: #ffffff;
+}
+
+/* Navbar mais espaçada e com bordas arredondadas */
+.navbar {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px;
 }
 
 /* Cards de funcionalidades */
@@ -152,8 +187,132 @@ blockquote-footer {
     color: #444; /* Cor de texto suave para melhor legibilidade */
 }
 
-/* Alinhamento de texto em seções */
-h2, h3 {
+/* Estilos de foco */
+input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Ajuste do carrossel */
+.carousel-item img {
+    width: 40%;
+    height: 500px;
+    object-fit: cover;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    transition: transform 0.2s ease-in-out;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo claro para visibilidade */
+    border-radius: 50%; /* Borda arredondada */
+}
+
+/* Parallax */
+.parallax {
+    background-image: url('img/cultura-maker1.png');
+    height: 500px;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/* Estilos do Chatbot */
+
+/* Botão flutuante do chatbot */
+.chatbot-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FF6F61; /* Cor de destaque para o botão */
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    padding: 15px;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.chatbot-btn:hover {
+    background-color: #FF4A3B; /* Cor mais intensa ao passar o mouse */
+    transform: scale(1.1);
+}
+
+/* Janela do chatbot */
+.chatbot-window {
+    position: fixed;
+    bottom: 70px; /* Ajuste para estar acima do botão */
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: none; /* Inicialmente escondido */
+    flex-direction: column;
+    display: flex;
+    animation: slideIn 0.5s ease-out;
+}
+
+/* Cabeçalho do chatbot */
+.chatbot-header {
+    background-color: #FF6F61; /* Cor do cabeçalho */
+    color: #ffffff;
+    padding: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     text-align: center;
+}
+
+/* Área de mensagens */
+.chatbot-messages {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto; /* Permite rolagem */
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
     color: #333;
+}
+
+/* Caixa de input */
+.chatbot-input {
+    padding: 10px;
+    border: none;
+    border-top: 1px solid #ddd;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 1rem;
+    width: 100%;
+    color: #333;
+    outline: none;
+}
+
+/* Botão de envio */
+.chatbot-send-btn {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo de botão de envio do chatbot ao passar o mouse */
+.chatbot-send-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Animação do chatbot */
+@keyframes slideIn {
+    from {
+        right: -350px;
+    }
+    to {
+        right: 20px;
+    }
 }
