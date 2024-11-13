@@ -1,0 +1,104 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container my-5 py-5">
+  <!-- Título e introdução -->
+  <div class="text-center">
+    <h1 class="display-4">Quem Somos</h1>
+    <p class="lead mt-3">O CIMAS Maker é uma plataforma de compartilhamento de projetos, construída para unir estudantes, professores e entusiastas da cultura maker em um espaço de colaboração. Nossa missão é democratizar o acesso ao conhecimento prático e estimular a inovação através da troca de ideias e experiências.
+
+        Criado com o propósito de facilitar o aprendizado na cultura maker, o CIMAS Maker oferece um ambiente onde os usuários podem aprender, criar e compartilhar. Acreditamos que a educação prática e o compartilhamento de conhecimento são fundamentais para promover o desenvolvimento individual e social.
+        
+        Com uma equipe de administradores, professores e alunos dedicados, trabalhamos para transformar o CIMAS Maker em uma comunidade acolhedora e inclusiva, onde cada membro pode explorar seu potencial e contribuir com o crescimento de todos.
+        
+        Junte-se a nós e faça parte dessa jornada de criação, aprendizado e inovação.</p>
+  </div>
+  
+  <!-- Seção sobre a missão -->
+  <div class="row mt-5">
+    <div class="col-md-6 d-flex align-items-center">
+      <div>
+        <h2 class="text-primary">Nossa Missão</h2>
+        <p>Empoderar indivíduos e comunidades com conhecimento, ferramentas e inspiração para criar, compartilhar e colaborar em projetos inovadores. Acreditamos que juntos podemos transformar ideias em realidade.</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img src="{{ url_for('static', filename='img/quemsomos1.png') }}" class="img-fluid rounded shadow-lg" alt="Missão CIMAS Maker">
+    </div>
+  </div>
+
+  <!-- Valores do CIMAS Maker -->
+  <div class="mt-5">
+    <h2 class="text-center text-primary">Nossos Valores</h2>
+    <div class="row mt-4">
+      <div class="col-md-4 text-center">
+        <i class="fas fa-lightbulb fa-3x text-primary"></i>
+        <h4 class="mt-3">Inovação</h4>
+        <p>Exploramos novas possibilidades e incentivamos a criatividade em cada projeto.</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <i class="fas fa-users fa-3x text-primary"></i>
+        <h4 class="mt-3">Comunidade</h4>
+        <p>Um espaço de colaboração onde todos podem aprender e crescer juntos.</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <i class="fas fa-hands-helping fa-3x text-primary"></i>
+        <h4 class="mt-3">Compartilhamento</h4>
+        <p>Valorizamos o compartilhamento de conhecimentos para construir um futuro mais brilhante.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Equipe -->
+  <div class="mt-5">
+    <h2 class="text-center text-primary">Nossa Equipe</h2>
+    <p class="text-center">O CIMAS Maker foi idealizado e desenvolvido por uma mente apaixonada pela inovação e pelo movimento maker.</p>
+    <div class="text-center mt-4">
+      <!-- Imagem com modal -->
+      <img src="{{ url_for('static', filename='img/quemsomos2.jpg') }}" class="rounded-circle shadow-lg" width="250" height="250" alt="Membro da equipe" data-bs-toggle="modal" data-bs-target="#equipeModal" style="cursor: pointer;">
+      <h5 class="mt-3">Gustavson Barros</h5>
+      <p>Co-fundador e Desenvolvedor</p>
+    </div>
+  </div>
+
+  <!-- Modal com informações detalhadas -->
+  <div class="modal fade" id="equipeModal" tabindex="-1" aria-labelledby="equipeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="equipeModalLabel">Gustavson Barros</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <h6 class="text-primary">Graduação</h6>
+          <p>Graduando Análise e Desenvolvimento de Sistemas - IFPE</p>
+          
+          <h6 class="text-primary mt-3">Cursos</h6>
+          <ul>
+            <li>Técnico em Redes de Computadores - IFPE</li>
+            <li>Backend Python - SOFTEX</li>
+            <li>Certificação - CompTIA Linux+</li>
+          </ul>
+
+          <h6 class="text-primary mt-3">Projetos</h6>
+          <ul>
+            <li>Projeto de Diagnóstico de Câncer de Pele com Machine Learning</li>
+            <li>CIMAS Maker - Plataforma de Cultura Maker</li>
+            
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chamada à ação -->
+  <div class="text-center mt-5">
+    <h2 class="text-primary">Junte-se a Nós!</h2>
+    <p>Faça parte dessa comunidade inovadora e compartilhe suas ideias para transformar o mundo.</p>
+    <a class="btn btn-primary btn-lg mt-3" href="{{ url_for('register') }}" role="button">Cadastre-se</a>
+  </div>
+</div>
+{% endblock %}

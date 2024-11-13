@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h2 class="mb-4">Dashboard</h2>
+<h2 class="mb-4">Painel de Controle </h2>
 <p class="lead">Bem-vindo, {{ session.profile }}!</p>
 
 <div class="alert alert-info" role="alert">
@@ -11,7 +11,7 @@
     {% if session.profile == 'admin' %}
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header bg-primary text-white">
                     Administração
                 </div>
                 <div class="card-body">
@@ -23,31 +23,31 @@
     {% elif session.profile == 'teacher' %}
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header bg-success text-white">
                     Funcionalidades do Professor
                 </div>
                 <div class="card-body">
-                    <p class="card-text">Você pode gerenciar suas turmas e materiais.</p>
-                    <a href="{{ url_for('teacher_features') }}" class="btn btn-primary">Gerenciar Turmas</a>
+                    <p class="card-text">Gerencie suas turmas e materiais para melhor acompanhamento dos alunos.</p>
+                    <a href="{{ url_for('teacher_features') }}" class="btn btn-success">Gerenciar Turmas</a>
                 </div>
             </div>
         </div>
     {% elif session.profile == 'student' %}
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header bg-info text-white">
                     Funcionalidades do Aluno
                 </div>
                 <div class="card-body">
-                    <p class="card-text">Acesse seus materiais e faça upload de projetos.</p>
-                    <a href="{{ url_for('student_features') }}" class="btn btn-primary">Ver Materiais</a>
+                    <p class="card-text">Acesse seus materiais e faça upload de projetos e trabalhos.</p>
+                    <a href="{{ url_for('student_features') }}" class="btn btn-info">Ver Materiais</a>
                 </div>
             </div>
         </div>
     {% else %}
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header bg-secondary text-white">
                     Perfil Desconhecido
                 </div>
                 <div class="card-body">

@@ -177,7 +177,24 @@ def reset_password(token):
 def dashboard():
     if 'user_id' not in session:
         return redirect(url_for('login'))
-    return render_template('dashboard.html', profile=session['profile'])
+
+    db = get_db_connection()
+    
+    # Contagem de usuários e uploads
+    user_count = db.execute('SELECT COUNT(*) FROM users').fetchone()[0]
+    upload_count = db.execute('SELECT COUNT(*) FROM uploads').fetchone()[0]
+    feedback_count = db.execute('SELECT COUNT(*) FROM feedback').fetchone()[0]
+    
+    db.close()
+
+    return render_template(
+        'dashboard.html', 
+        profile=session['profile'],
+        user_count=user_count,
+        upload_count=upload_count,
+        feedback_count=feedback_count
+    )
+
 
 # Rota para upload de arquivos
 @app.route('/upload', methods=['GET', 'POST'])
@@ -259,6 +276,11 @@ def chatbot():
     
         
     return render_template('chatbot.html')
+
+@app.route('/quem_somos')
+def quem_somos():
+    return render_template('quem_somos.html')
+
 
 
 if __name__ == '__main__':

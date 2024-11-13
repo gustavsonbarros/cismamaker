@@ -316,3 +316,25 @@ input:focus {
         right: 20px;
     }
 }
+
+footer {
+    background-color: #f8f9fa; /* Cor de fundo suave */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  footer p, footer a {
+    margin: 0;
+    padding: 5px;
+  }
+  
+  footer a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    text-decoration: underline;
+  }
+  
